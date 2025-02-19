@@ -1,0 +1,379 @@
+[18-Feb-2025 11:54:58 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 3
+            [vehicule_id] => 2
+            [chauffeur_id] => 1
+            [date_depart] => 2025-02-15 00:00:00
+            [date_arrivee_prevue] => 2025-02-19 00:00:00
+            [itineraire] => {"type": "Point", "coordinates": [30.122427091155, -0.46103570529377]}
+            [statut] => Planifiée
+            [colis_id] => 4
+            [statut_colis] => Prêt à être livré
+        )
+
+    [1] => Array
+        (
+            [livraison_id] => 2
+            [vehicule_id] => 2
+            [chauffeur_id] => 1
+            [date_depart] => 2025-02-14 00:00:00
+            [date_arrivee_prevue] => 2025-02-20 00:00:00
+            [itineraire] => {"type": "Point", "coordinates": [29.712220417354, -1.5622782959378]}
+            [statut] => Planifiée
+            [colis_id] => 5
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[18-Feb-2025 11:57:18 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 5
+            [vehicule_id] => 2
+            [chauffeur_id] => 3
+            [date_depart] => 2025-02-16 14:26:00
+            [date_arrivee_prevue] => 2025-02-18 18:26:00
+            [itineraire] => {"type": "Point", "coordinates": [23.282569429909, -2.078520224276]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[18-Feb-2025 12:06:53 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 5
+            [date_depart] => 2025-02-16 14:26:00
+            [date_arrivee_prevue] => 2025-02-18 18:26:00
+            [itineraire] => {"type": "Point", "coordinates": [23.282569429909, -2.078520224276]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[18-Feb-2025 14:48:56 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[18-Feb-2025 15:05:07 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 10:49:55 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 10:51:09 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 10:57:41 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 11:02:05 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 11:30:24 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 11:51:07 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 11:51:07 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 12:42:43 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 12:42:43 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 12:54:31 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 12:54:31 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 12:54:31 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 12:54:32 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 13:28:59 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 13:30:25 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 13:48:15 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 13:55:33 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 13:56:34 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [chauffeur_id] => 3
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+
+[19-Feb-2025 14:00:11 Europe/Berlin] Données livraisons : Array
+(
+    [0] => Array
+        (
+            [livraison_id] => 9
+            [chauffeur_id] => 3
+            [date_depart] => 2025-02-11 13:31:00
+            [date_arrivee_prevue] => 2025-02-14 17:31:00
+            [itineraire] => {"type": "Point", "coordinates": [15.328429806762, -4.3720079298576]}
+            [statut] => Planifiée
+            [colis_id] => 9
+            [statut_colis] => Prêt à être livré
+        )
+
+)
+

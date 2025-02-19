@@ -1,0 +1,23 @@
+=== Nouvelle Requête ===
+Données reçues : {"chauffeur_id":"1","colis_id":"5","date_depart":"2025-02-14","date_arrivee_prevue":"2025-02-20","statut":"Planifi\u00e9e","statut_colis":"Pr\u00eat \u00e0 \u00eatre livr\u00e9","itineraire":"-1.534822507360571, 29.673768268414875"}
+Requête SQL : INSERT INTO livraisons (chauffeur_id, colis_id, date_depart, date_arrivee_prevue, statut, statut_colis, itineraire) 
+          VALUES (?, ?, ?, ?, ?, ?, ?)
+Erreur MySQL : Cannot get geometry object from data you send to the GEOMETRY field
+=== Nouvelle Requête ===
+Données reçues : {"chauffeur_id":"1","colis_id":"5","date_depart":"2025-02-14","date_arrivee_prevue":"2025-02-20","statut":"Planifi\u00e9e","statut_colis":"Pr\u00eat \u00e0 \u00eatre livr\u00e9","itineraire":"-1.5622782959377557, 29.712220417354256"}
+Requête SQL : INSERT INTO livraisons (chauffeur_id, colis_id, date_depart, date_arrivee_prevue, statut, statut_colis, itineraire) 
+          VALUES (?, ?, ?, ?, ?, ?, ST_GeomFromText(?))
+Valeurs : 1, 5, 2025-02-14, 2025-02-20, Planifiée, Prêt à être livré, POINT(29.712220417354 -1.5622782959378)
+Succès : Livraison ajoutée.
+=== Nouvelle Requête ===
+Données reçues : {"chauffeur_id":"1","colis_id":"4","date_depart":"2025-02-15","date_arrivee_prevue":"2025-02-19","statut":"Planifi\u00e9e","statut_colis":"Pr\u00eat \u00e0 \u00eatre livr\u00e9","itineraire":"-0.4610357052937692, 30.122427091155476"}
+Requête SQL : INSERT INTO livraisons (chauffeur_id, colis_id, date_depart, date_arrivee_prevue, statut, statut_colis, itineraire) 
+          VALUES (?, ?, ?, ?, ?, ?, ST_GeomFromText(?))
+Valeurs : 1, 4, 2025-02-15, 2025-02-19, Planifiée, Prêt à être livré, POINT(30.122427091155 -0.46103570529377)
+Succès : Livraison ajoutée.
+=== Nouvelle Requête ===
+Données reçues : {"chauffeur_id":"5","colis_id":"8","date_depart":"2025-02-16","date_arrivee_prevue":"2025-02-19","statut":"Planifi\u00e9e","statut_colis":"Pr\u00eat \u00e0 \u00eatre livr\u00e9","itineraire":"-1.265632498958297, 32.86278863246978"}
+Requête SQL : INSERT INTO livraisons (chauffeur_id, colis_id, date_depart, date_arrivee_prevue, statut, statut_colis, itineraire) 
+          VALUES (?, ?, ?, ?, ?, ?, ST_GeomFromText(?))
+Valeurs : 5, 8, 2025-02-16, 2025-02-19, Planifiée, Prêt à être livré, POINT(32.86278863247 -1.2656324989583)
+Succès : Livraison ajoutée.
