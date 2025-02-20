@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'const.dart';
 
 class MyLogin extends StatefulWidget {
@@ -33,9 +32,9 @@ class _MyLoginState extends State<MyLogin> {
 
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
+        print("Données reçues : $responseData");
 
         if (responseData['success'] == true) {
-          // ✅ Vérifier si "success" est bien un booléen
           Navigator.pushReplacementNamed(context, '/home');
         } else {
           _attempts++;
@@ -53,7 +52,7 @@ class _MyLoginState extends State<MyLogin> {
         throw Exception("Erreur HTTP ${response.statusCode}");
       }
     } catch (e) {
-      print("Erreur lors de la connexion : $e"); // Log des erreurs
+      print("Erreur lors de la connexion : $e");
       _showErrorDialog(
           context, 'Erreur de connexion. Vérifiez votre connexion internet.');
     }

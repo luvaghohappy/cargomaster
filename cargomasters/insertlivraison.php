@@ -42,7 +42,7 @@ if ($latitude == 0 || $longitude == 0) {
 
 // Insert new delivery
 $point = "POINT($longitude $latitude)";
-$query = "INSERT INTO livraisons (chauffeur_id, colis_id, date_depart, date_arrivee_prevue, statut_colis, itineraire) 
+$query = "INSERT INTO livraisons (chauffeur_id, colis_id, date_depart, date_arrivee_prevue, statut, statut_colis, itineraire) 
           VALUES (?, ?, ?, ?, ?, ?, ST_GeomFromText(?))";
 
 if ($stmt = $connect->prepare($query)) {

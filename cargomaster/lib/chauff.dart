@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -25,6 +26,22 @@ class _ChauffeurDashboardState extends State<ChauffeurDashboard> {
   List<bool> deliveredStatus = [];
   List<bool> delayedStatus = [];
 
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      fetchLivraisons();
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel(); // Cancel the timer when the widget is disposed
+    super.dispose();
+  }
+
   // Fonction pour obtenir la position actuelle
   Future<Position> _getCurrentPosition() async {
     bool serviceEnabled;
@@ -48,7 +65,8 @@ class _ChauffeurDashboardState extends State<ChauffeurDashboard> {
     }
 
     // Retourne la position actuelle
-    return await Geolocator.getCurrentPosition();
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
   }
 
   Future<void> fetchLivraisons() async {
@@ -102,6 +120,10 @@ class _ChauffeurDashboardState extends State<ChauffeurDashboard> {
       _openGoogleMaps(currentLat, currentLon, lat, lon);
     } catch (e) {
       print('❌ Erreur lors de la conversion des coordonnées: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text("Erreur lors de la conversion des coordonnées")),
+      );
     }
   }
 
@@ -174,69 +196,34 @@ class _ChauffeurDashboardState extends State<ChauffeurDashboard> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    fetchLivraisons();
-    // _loadDeliveryStatuses();
-  }
-
   Future<void> _updateStatus(int livraisonId, String etat) async {
     final response = await http.post(
       Uri.parse("${AppConstants.baseUrl}update_status.php"),
-      body: {
-        "livraison_id": livraisonId.toString(),
-        "etat": etat,
-      },
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({"livraison_id": livraisonId, "etat": etat}),
     );
 
     if (response.statusCode == 200) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Statut mis à jour en $etat"),
-          backgroundColor: Colors.green,
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Erreur lors de la mise à jour du statut"),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
-
-  // Fonction pour charger l'état des livraisons
-  Future<void> _loadDeliveryStatuses() async {
-    final response = await http.get(
-      Uri.parse("${AppConstants.baseUrl}get_delivery_statuses.php"),
-    );
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      for (var item in data['livraisons']) {
-        int livraisonId = item['livraison_id'];
-        String etat = item['etat'];
-
-        setState(() {
-          if (etat == 'Livrée') {
-            deliveredStatus[livraisonId] = true;
-            delayedStatus[livraisonId] = false;
-          } else if (etat == 'Retardée') {
-            delayedStatus[livraisonId] = true;
-            deliveredStatus[livraisonId] = false;
-          } else {
-            deliveredStatus[livraisonId] = false;
-            delayedStatus[livraisonId] = false;
-          }
-        });
+      final data = json.decode(response.body);
+      if (data['status'] == 'success') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Statut mis à jour avec succès"),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Erreur : ${data['message']}"),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     } else {
-      // Erreur dans la récupération des données
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Erreur lors du chargement des statuts des livraisons"),
+          content: Text("Erreur lors de la mise à jour"),
           backgroundColor: Colors.red,
         ),
       );
@@ -284,6 +271,7 @@ class _ChauffeurDashboardState extends State<ChauffeurDashboard> {
                     DataColumn(label: Text('Date Arrivée')),
                     DataColumn(label: Text('Itinéraire')),
                     DataColumn(label: Text('Statut Colis')),
+                    DataColumn(label: Text('Etat')),
                     DataColumn(label: Text("Partage Position")),
                     DataColumn(label: Text("Livrée")),
                     DataColumn(label: Text("Retardée")),
@@ -338,6 +326,11 @@ class _ChauffeurDashboardState extends State<ChauffeurDashboard> {
                         ),
                       ),
                       DataCell(
+                        Text(
+                          livraison['etat'].toString(),
+                        ),
+                      ),
+                      DataCell(
                         IconButton(
                           icon: Icon(Icons.share),
                           onPressed: () => sendPosition(
@@ -346,33 +339,44 @@ class _ChauffeurDashboardState extends State<ChauffeurDashboard> {
                           ),
                         ),
                       ),
-                      DataCell(Checkbox(
-                        value: deliveredStatus[index],
-                        onChanged: (bool? value) {
-                          if (value == true) {
+                      DataCell(
+                        IconButton(
+                          icon: Icon(
+                            deliveredStatus[index]
+                                ? Icons.done
+                                : Icons.circle_outlined,
+                            color: deliveredStatus[index]
+                                ? Colors.green
+                                : Colors.grey,
+                          ),
+                          onPressed: () {
                             setState(() {
                               deliveredStatus[index] = true;
                               delayedStatus[index] = false;
                             });
                             _updateStatus(livraison['livraison_id'], "Livrée");
-                          }
-                        },
-                        activeColor: Colors.green,
-                      )),
-                      DataCell(Checkbox(
-                        value: delayedStatus[index],
-                        onChanged: (bool? value) {
-                          if (value == true) {
+                          },
+                        ),
+                      ),
+                      DataCell(
+                        IconButton(
+                          icon: Icon(
+                            delayedStatus[index]
+                                ? Icons.error_outline
+                                : Icons.circle_outlined,
+                            color:
+                                delayedStatus[index] ? Colors.red : Colors.grey,
+                          ),
+                          onPressed: () {
                             setState(() {
                               delayedStatus[index] = true;
                               deliveredStatus[index] = false;
                             });
                             _updateStatus(
                                 livraison['livraison_id'], "Retardée");
-                          }
-                        },
-                        activeColor: Colors.red,
-                      )),
+                          },
+                        ),
+                      ),
                     ]);
                   }).toList(),
                 ),

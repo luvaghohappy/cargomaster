@@ -12,6 +12,15 @@ header('Content-Type: application/json');
 include('conn.php');
 mysqli_set_charset($connect, "utf8");
 
+// Log de connexion
+if (!$connect) {
+    error_log("Erreur de connexion : " . mysqli_connect_error());
+    echo json_encode(["error" => "Problème de connexion à la base de données"]);
+    exit;
+} else {
+    error_log("Connexion réussie à la base de données.");
+}
+
 if (!isset($_GET['chauffeur_id'])) {
     echo json_encode(["error" => "Chauffeur ID manquant"]);
     exit;
@@ -19,23 +28,26 @@ if (!isset($_GET['chauffeur_id'])) {
 
 $chauffeur_id = intval($_GET['chauffeur_id']);
 
-if (!$connect) {
-    error_log("Erreur de connexion : " . mysqli_connect_error());
-    echo json_encode(["error" => "Problème de connexion à la base de données"]);
-    exit;
-}
+// 🔹 Nouvelle requête SQL avec JOIN
+$sql = "SELECT l.livraison_id, l.chauffeur_id, l.date_depart, l.date_arrivee_prevue, 
+               ST_AsGeoJSON(l.itineraire) AS itineraire, l.statut, l.colis_id, l.statut_colis, e.etat
+        FROM livraisons l
+        LEFT JOIN expeditions e ON l.livraison_id = e.livraison_id
+        WHERE l.chauffeur_id = ? 
+        ORDER BY l.date_depart DESC";
 
-// 🔹 Convertir itineraire en GeoJSON
-$sql = "SELECT livraison_id,chauffeur_id, date_depart, date_arrivee_prevue, 
-               ST_AsGeoJSON(itineraire) AS itineraire, statut, colis_id, statut_colis
-        FROM livraisons WHERE chauffeur_id = ? ORDER BY date_depart DESC";
+// Log de la requête SQL
+error_log("Requête SQL préparée : " . $sql);
 
 $stmt = $connect->prepare($sql);
 
+// Log si la préparation échoue
 if ($stmt === false) {
     error_log("Erreur SQL : " . $connect->error);
     echo json_encode(["error" => "Erreur de préparation SQL"]);
     exit;
+} else {
+    error_log("Requête SQL préparée avec succès.");
 }
 
 $stmt->bind_param("i", $chauffeur_id);
@@ -44,6 +56,7 @@ if ($stmt->execute()) {
     $result = $stmt->get_result();
     $livraisons = $result->fetch_all(MYSQLI_ASSOC);
 
+    // Log des données récupérées
     error_log("Données livraisons : " . print_r($livraisons, true));
 
     $json_response = json_encode(["status" => "success", "livraisons" => $livraisons ?: []]);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 19 fév. 2025 à 14:24
+-- Généré le : jeu. 20 fév. 2025 à 23:28
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.0.28
 
@@ -53,7 +53,7 @@ CREATE TABLE `administrateur` (
 --
 
 INSERT INTO `administrateur` (`id_admin`, `email`, `passwords`) VALUES
-(1, 'master@gmail.com', '$2y$10$YsGgfH/0eOWQehWz1.X1DuYdrjfHfClEgadjKwjj3Wljn0jFk2Ui6');
+(1, 'master@gmail.com', '$2y$10$DDNnknEpLNMB39uEwpIE9Ocjy3AlB.6yEUQUt6.Qkrs9ojenA7W/K');
 
 -- --------------------------------------------------------
 
@@ -202,7 +202,9 @@ CREATE TABLE `expeditions` (
 --
 
 INSERT INTO `expeditions` (`expedition_id`, `livraison_id`, `chauffeur_id`, `position_actuelle`, `etat`) VALUES
-(1, 9, 3, 0x000000000101000000f3cf679b76acfebfc87663e6a70d3e40, 'En route');
+(1, 9, 3, 0x000000000101000000f3cf679b76acfebfc87663e6a70d3e40, 'Livrée'),
+(2, 7, 6, 0x00000000010100000000f4458ce8a8febf52f2ea1c030e3e40, 'Livrée'),
+(3, 10, 6, 0x000000000101000000c87663e6a70d3e40f3cf679b76acfebf, 'Retardée');
 
 --
 -- Déclencheurs `expeditions`
@@ -257,7 +259,8 @@ INSERT INTO `livraisons` (`livraison_id`, `vehicule_id`, `chauffeur_id`, `date_d
 (6, 3, 6, '2025-02-18 13:28:00', '2025-02-19 13:28:00', 0x00000000010100000091779261674c3d40122061749ac4ca3f, 'Planifiée', 4, 'Prêt à être livré'),
 (7, 3, 6, '2025-02-20 17:29:00', '2025-02-24 17:29:00', 0x0000000001010000008e85ae139c413d400625b01b3272fabf, 'Planifiée', 5, 'Prêt à être livré'),
 (8, 1, 5, '2025-02-27 17:30:00', '2025-02-28 18:30:00', 0x000000000101000000c0b00fdce76c42409094df1310b9f3bf, 'Planifiée', 8, 'Prêt à être livré'),
-(9, 2, 3, '2025-02-11 13:31:00', '2025-02-14 17:31:00', 0x00000000010100000016269ef327a82e403d5d92a5ef7c11c0, 'Planifiée', 9, 'Prêt à être livré');
+(9, 2, 3, '2025-02-11 13:31:00', '2025-02-14 17:31:00', 0x00000000010100000016269ef327a82e403d5d92a5ef7c11c0, 'Planifiée', 9, 'Prêt à être livré'),
+(10, 3, 6, '2025-02-20 23:06:00', '2025-02-20 23:06:00', 0x000000000101000000c2385d9b634b4040518d007a7d4cd63f, 'Planifiée', 10, 'Prêt à être livré');
 
 --
 -- Déclencheurs `livraisons`
@@ -306,8 +309,8 @@ CREATE TABLE `states` (
 INSERT INTO `states` (`id`, `table_name`, `record_count`) VALUES
 (1, 'clients', 5),
 (2, 'colis', 6),
-(3, 'livraisons', 4),
-(4, 'expeditions', 1),
+(3, 'livraisons', 5),
+(4, 'expeditions', 3),
 (5, 'chauffeurs', 4),
 (6, 'vehicules', 4);
 
@@ -463,7 +466,7 @@ ALTER TABLE `colis_livraison`
 -- AUTO_INCREMENT pour la table `expeditions`
 --
 ALTER TABLE `expeditions`
-  MODIFY `expedition_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `expedition_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `itineraires`
@@ -475,7 +478,7 @@ ALTER TABLE `itineraires`
 -- AUTO_INCREMENT pour la table `livraisons`
 --
 ALTER TABLE `livraisons`
-  MODIFY `livraison_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `livraison_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `states`

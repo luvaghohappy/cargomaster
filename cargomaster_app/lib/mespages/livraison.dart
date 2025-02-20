@@ -37,7 +37,7 @@ class _LivraisonsState extends State<Livraisons> {
     });
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       fetchChauffeurs();
-      // fetchLivraisons();
+      fetchLivraisons();
     });
   }
 
@@ -383,6 +383,7 @@ class _LivraisonsState extends State<Livraisons> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text("Colis a Livrés"),
       ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:cargomaster_app/admin.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,7 +12,6 @@ import 'mespages/expedies.dart';
 import 'mespages/livraison.dart';
 import 'mespages/utilisateur.dart';
 import 'mylogin.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MARGO MASTER',
+      title: 'CARGO MASTER',
       debugShowCheckedModeBanner: false,
       themeMode: _themeMode,
       theme: ThemeData(
@@ -65,16 +65,13 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: Colors.black,
         appBarTheme: const AppBarTheme(color: Colors.black),
       ),
-      home: DashboardScreen(
-        isDarkMode: _themeMode == ThemeMode.dark,
-        onToggleTheme: _toggleTheme,
-      ),
-      // routes: {
-      //   '/home': (context) => DashboardScreen(
-      //         isDarkMode: _themeMode == ThemeMode.dark,
-      //         onToggleTheme: _toggleTheme,
-      //       ),
-      // },
+      home: MyLogin(),
+      routes: {
+        '/home': (context) => DashboardScreen(
+              isDarkMode: _themeMode == ThemeMode.dark,
+              onToggleTheme: _toggleTheme,
+            ),
+      },
     );
   }
 }
