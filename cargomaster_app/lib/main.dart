@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:cargomaster_app/admin.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -76,7 +75,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   final bool isDarkMode;
   final Function(bool) onToggleTheme;
 
@@ -87,16 +86,31 @@ class DashboardScreen extends StatelessWidget {
   });
 
   @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  Widget _selectedPage = DashboardContent(); // Page initiale
+
+  void _onMenuItemSelected(Widget page) {
+    setState(() {
+      _selectedPage = page;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
         children: [
           SideMenu(
-            isDarkMode: isDarkMode,
-            onToggleTheme: onToggleTheme,
+            isDarkMode: widget.isDarkMode,
+            onToggleTheme: widget.onToggleTheme,
+            onItemSelected:
+                _onMenuItemSelected, // Mise à jour de la page affichée
           ),
           Expanded(
-            child: DashboardContent(),
+            child: _selectedPage, // Affiche la page sélectionnée
           ),
         ],
       ),
@@ -104,21 +118,37 @@ class DashboardScreen extends StatelessWidget {
   }
 }
 
-class SideMenu extends StatelessWidget {
+class SideMenu extends StatefulWidget {
   final Function(bool) onToggleTheme;
   final bool isDarkMode;
+  final Function(Widget) onItemSelected;
 
   const SideMenu({
     super.key,
     required this.onToggleTheme,
     required this.isDarkMode,
+    required this.onItemSelected,
   });
+
+  @override
+  State<SideMenu> createState() => _SideMenuState();
+}
+
+class _SideMenuState extends State<SideMenu> {
+  int selectedIndex = 0; // Indice de l'élément sélectionné
+
+  void handleItemSelected(int index, Widget page) {
+    setState(() {
+      selectedIndex = index;
+    });
+    widget.onItemSelected(page);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 250,
-      color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade300,
+      color: widget.isDarkMode ? Colors.grey.shade900 : Colors.grey.shade300,
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
         children: [
@@ -134,8 +164,9 @@ class SideMenu extends StatelessWidget {
                 ),
               ),
               IconButton(
-                icon: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode),
-                onPressed: () => onToggleTheme(!isDarkMode),
+                icon: Icon(
+                    widget.isDarkMode ? Icons.dark_mode : Icons.light_mode),
+                onPressed: () => widget.onToggleTheme(!widget.isDarkMode),
               ),
             ],
           ),
@@ -143,81 +174,51 @@ class SideMenu extends StatelessWidget {
           SideMenuItem(
             icon: Icons.dashboard,
             label: 'Dashboard',
-            isActive: true,
-            onTap: () {},
-            isDarkMode: isDarkMode,
+            isDarkMode: widget.isDarkMode,
+            isActive: selectedIndex == 0,
+            onTap: () => handleItemSelected(0, DashboardContent()),
           ),
           SideMenuItem(
             icon: Icons.person_2_outlined,
             label: 'Clients',
-            isDarkMode: isDarkMode,
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const Clients(),
-                ),
-              );
-            },
+            isDarkMode: widget.isDarkMode,
+            isActive: selectedIndex == 1,
+            onTap: () => handleItemSelected(1, const Clients()),
           ),
           SideMenuItem(
-            icon: Icons.person_2_outlined,
+            icon: Icons.inventory_2_outlined,
             label: 'Colis',
-            isDarkMode: isDarkMode,
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const Colis(),
-                ),
-              );
-            },
+            isDarkMode: widget.isDarkMode,
+            isActive: selectedIndex == 2,
+            onTap: () => handleItemSelected(2, const Colis()),
           ),
           SideMenuItem(
             icon: Icons.car_rental_outlined,
-            label: 'Chauffeurs et Vehicules',
-            isDarkMode: isDarkMode,
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => AjouterChauffeurVehicule(),
-                ),
-              );
-            },
+            label: 'Chauffeurs et Véhicules',
+            isDarkMode: widget.isDarkMode,
+            isActive: selectedIndex == 3,
+            onTap: () => handleItemSelected(3, AjouterChauffeurVehicule()),
           ),
           SideMenuItem(
             icon: Icons.delivery_dining,
             label: 'Livraisons',
-            isDarkMode: isDarkMode,
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const Livraisons(),
-                ),
-              );
-            },
+            isDarkMode: widget.isDarkMode,
+            isActive: selectedIndex == 4,
+            onTap: () => handleItemSelected(4, const Livraisons()),
           ),
           SideMenuItem(
             icon: Icons.track_changes,
-            label: 'Colis Expediés',
-            isDarkMode: isDarkMode,
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const Expedies(),
-                ),
-              );
-            },
+            label: 'Colis Expédiés',
+            isDarkMode: widget.isDarkMode,
+            isActive: selectedIndex == 5,
+            onTap: () => handleItemSelected(5, const Expedies()),
           ),
           SideMenuItem(
             icon: Icons.logout_outlined,
-            label: 'Deconnexion',
-            isDarkMode: isDarkMode,
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => MyLogin(),
-                ),
-              );
-            },
+            label: 'Déconnexion',
+            isDarkMode: widget.isDarkMode,
+            isActive: selectedIndex == 6,
+            onTap: () => handleItemSelected(6, MyLogin()),
           ),
         ],
       ),
@@ -254,7 +255,9 @@ class SideMenuItem extends StatelessWidget {
           style: TextStyle(color: isActive ? activeColor : textColor),
         ),
         tileColor: isActive ? activeColor.withOpacity(0.2) : null,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
         onTap: onTap,
       ),
     );
@@ -629,10 +632,19 @@ class DataTableWidget extends StatefulWidget {
 class _DataTableWidgetState extends State<DataTableWidget> {
   List<Map<String, dynamic>> items = [];
 
+  Timer? _timer;
   @override
   void initState() {
     super.initState();
-    fetch();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      fetch();
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel(); // Cancel the timer when the widget is disposed
+    super.dispose();
   }
 
   Future<void> fetch() async {
