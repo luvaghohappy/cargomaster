@@ -436,109 +436,112 @@ class _LivraisonsState extends State<Livraisons> {
                       ),
                     )
                   else
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 0.2),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: DataTable(
-                        columnSpacing: 20.0,
-                        headingRowColor: MaterialStateProperty.all(
-                          Colors.deepOrange.shade100,
+                    Card(
+                      elevation: 4,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 0.2),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        columns: const [
-                          DataColumn(
-                            label: Text('ID Livraison'),
+                        child: DataTable(
+                          columnSpacing: 20.0,
+                          headingRowColor: MaterialStateProperty.all(
+                            Colors.deepOrange.shade100,
                           ),
-                          DataColumn(
-                            label: Text('Vehicule ID'),
-                          ),
-                          DataColumn(
-                            label: Text('Chauffeur'),
-                          ),
-                          DataColumn(
-                            label: Text('Colis ID'),
-                          ),
-                          DataColumn(
-                            label: Text('Date Départ'),
-                          ),
-                          DataColumn(
-                            label: Text('Date Arrivée'),
-                          ),
-                          DataColumn(
-                            label: Text('Itineraire'),
-                          ),
-                          DataColumn(
-                            label: Text('Statut'),
-                          ),
-                          DataColumn(
-                            label: Text('Statut Colis'),
-                          ),
-                          DataColumn(
-                            label: Text('Actions'),
-                          ),
-                        ],
-                        rows: livraisons.map((livraison) {
-                          return DataRow(
-                            cells: [
-                              DataCell(Text(
-                                livraison['livraison_id'].toString(),
-                              )),
-                              DataCell(Text(
-                                livraison['vehicule_id'].toString(),
-                              )),
-                              DataCell(
-                                Text(
-                                  livraison['chauffeur_id'].toString(),
+                          columns: const [
+                            DataColumn(
+                              label: Text('ID Livraison'),
+                            ),
+                            DataColumn(
+                              label: Text('Vehicule ID'),
+                            ),
+                            DataColumn(
+                              label: Text('Chauffeur'),
+                            ),
+                            DataColumn(
+                              label: Text('Colis ID'),
+                            ),
+                            DataColumn(
+                              label: Text('Date Départ'),
+                            ),
+                            DataColumn(
+                              label: Text('Date Arrivée'),
+                            ),
+                            DataColumn(
+                              label: Text('Itineraire'),
+                            ),
+                            DataColumn(
+                              label: Text('Statut'),
+                            ),
+                            DataColumn(
+                              label: Text('Statut Colis'),
+                            ),
+                            DataColumn(
+                              label: Text('Actions'),
+                            ),
+                          ],
+                          rows: livraisons.map((livraison) {
+                            return DataRow(
+                              cells: [
+                                DataCell(Text(
+                                  livraison['livraison_id'].toString(),
+                                )),
+                                DataCell(Text(
+                                  livraison['vehicule_id'].toString(),
+                                )),
+                                DataCell(
+                                  Text(
+                                    livraison['chauffeur_id'].toString(),
+                                  ),
                                 ),
-                              ),
-                              DataCell(
-                                Text(
-                                  livraison['colis_id'].toString(),
+                                DataCell(
+                                  Text(
+                                    livraison['colis_id'].toString(),
+                                  ),
                                 ),
-                              ),
-                              DataCell(
-                                Text(
-                                  livraison['date_depart'].toString(),
+                                DataCell(
+                                  Text(
+                                    livraison['date_depart'].toString(),
+                                  ),
                                 ),
-                              ),
-                              DataCell(
-                                Text(
-                                  livraison['date_arrivee_prevue'].toString(),
+                                DataCell(
+                                  Text(
+                                    livraison['date_arrivee_prevue'].toString(),
+                                  ),
                                 ),
-                              ),
-                              DataCell(
-                                Text(
-                                  livraison['itineraire'] ?? "N/A",
+                                DataCell(
+                                  Text(
+                                    livraison['itineraire'] ?? "N/A",
+                                  ),
                                 ),
-                              ),
-                              DataCell(
-                                Text(
-                                  livraison['statut'].toString(),
+                                DataCell(
+                                  Text(
+                                    livraison['statut'].toString(),
+                                  ),
                                 ),
-                              ),
-                              DataCell(
-                                Text(
-                                  livraison['statut_colis'].toString(),
+                                DataCell(
+                                  Text(
+                                    livraison['statut_colis'].toString(),
+                                  ),
                                 ),
-                              ),
-                              DataCell(
-                                Row(
-                                  children: [
-                                    const SizedBox(width: 5),
-                                    IconButton(
-                                      icon: const Icon(Icons.delete,
-                                          color: Colors.red),
-                                      onPressed: () => deleteLivraison(
-                                        livraison['livraison_id'].toString(),
+                                DataCell(
+                                  Row(
+                                    children: [
+                                      const SizedBox(width: 5),
+                                      IconButton(
+                                        icon: const Icon(Icons.delete,
+                                            color: Colors.red),
+                                        onPressed: () => deleteLivraison(
+                                          livraison['livraison_id'].toString(),
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          );
-                        }).toList(),
+                              ],
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
                 ],

@@ -256,119 +256,122 @@ class _ColisState extends State<Colis> {
                       ),
                     )
                   else
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 0.1),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: DataTable(
-                        columnSpacing: 20.0,
-                        headingRowColor: MaterialStateProperty.all(
-                          Colors.deepOrange.shade100,
+                    Card(
+                      elevation: 4,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 0.1),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        columns: const [
-                          DataColumn(label: Text('#')),
-                          DataColumn(
-                            label: Text('Client ID'),
+                        child: DataTable(
+                          columnSpacing: 20.0,
+                          headingRowColor: MaterialStateProperty.all(
+                            Colors.deepOrange.shade100,
                           ),
-                          DataColumn(
-                            label: Text('Noms client'),
-                          ),
-                          DataColumn(
-                            label: Text('Descriptions'),
-                          ),
-                          DataColumn(
-                            label: Text('Poids colis'),
-                          ),
-                          DataColumn(
-                            label: Text('Adresse Livraison'),
-                          ),
-                          DataColumn(
-                            label: Text('Date '),
-                          ),
-                          DataColumn(
-                            label: Text('Actions'),
-                          ),
-                        ],
-                        rows: List<DataRow>.generate(filteredItems.length,
-                            (int index) {
-                          final item = filteredItems[index];
-                          return DataRow(
-                            cells: [
-                              DataCell(
-                                Text(
-                                  (index + 1).toString(),
+                          columns: const [
+                            DataColumn(label: Text('#')),
+                            DataColumn(
+                              label: Text('Client ID'),
+                            ),
+                            DataColumn(
+                              label: Text('Noms client'),
+                            ),
+                            DataColumn(
+                              label: Text('Descriptions'),
+                            ),
+                            DataColumn(
+                              label: Text('Poids colis'),
+                            ),
+                            DataColumn(
+                              label: Text('Adresse Livraison'),
+                            ),
+                            DataColumn(
+                              label: Text('Date '),
+                            ),
+                            DataColumn(
+                              label: Text('Actions'),
+                            ),
+                          ],
+                          rows: List<DataRow>.generate(filteredItems.length,
+                              (int index) {
+                            final item = filteredItems[index];
+                            return DataRow(
+                              cells: [
+                                DataCell(
+                                  Text(
+                                    (index + 1).toString(),
+                                  ),
                                 ),
-                              ),
-                              DataCell(Text(
-                                item['client_id'] ?? '',
-                                style: const TextStyle(color: Colors.black),
-                              )),
-                              DataCell(Text(
-                                item['noms_client'] ?? '',
-                                style: const TextStyle(color: Colors.black),
-                              )),
-                              DataCell(Text(
-                                item['descriptions'] ?? '',
-                                style: const TextStyle(color: Colors.black),
-                              )),
-                              DataCell(Text(
-                                item['poids'] ?? '',
-                                style: const TextStyle(color: Colors.black),
-                              )),
-                              DataCell(Text(
-                                item['adresse_livraison'] ?? '',
-                                style: const TextStyle(color: Colors.black),
-                              )),
-                              DataCell(
-                                Text(
-                                  item['date_enregistrement	'] ?? '',
+                                DataCell(Text(
+                                  item['client_id'] ?? '',
                                   style: const TextStyle(color: Colors.black),
+                                )),
+                                DataCell(Text(
+                                  item['noms_client'] ?? '',
+                                  style: const TextStyle(color: Colors.black),
+                                )),
+                                DataCell(Text(
+                                  item['descriptions'] ?? '',
+                                  style: const TextStyle(color: Colors.black),
+                                )),
+                                DataCell(Text(
+                                  item['poids'] ?? '',
+                                  style: const TextStyle(color: Colors.black),
+                                )),
+                                DataCell(Text(
+                                  item['adresse_livraison'] ?? '',
+                                  style: const TextStyle(color: Colors.black),
+                                )),
+                                DataCell(
+                                  Text(
+                                    item['date_enregistrement	'] ?? '',
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
                                 ),
-                              ),
-                              DataCell(
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) => Livraisons(
-                                              colisId: int.tryParse(
-                                                      item['colis_id']) ??
-                                                  0,
-                                              adresse_livraison:
-                                                  item['adresse_livraison'] ??
-                                                      '',
+                                DataCell(
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) => Livraisons(
+                                                colisId: int.tryParse(
+                                                        item['colis_id']) ??
+                                                    0,
+                                                adresse_livraison:
+                                                    item['adresse_livraison'] ??
+                                                        '',
+                                              ),
                                             ),
+                                          );
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.black,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                           ),
-                                        );
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.black,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10, horizontal: 16),
                                         ),
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10, horizontal: 16),
-                                      ),
-                                      child: const Text(
-                                        "Livraisons",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
+                                        child: const Text(
+                                          "Livraisons",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          );
-                        }).toList(),
+                              ],
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
                 ],

@@ -473,114 +473,120 @@ class _AjouterChauffeurVehiculeState extends State<AjouterChauffeurVehicule> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 2),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: DataTable(
-                        columnSpacing: 20.0,
-                        headingRowColor: MaterialStateProperty.all(
-                          Colors.deepOrange.shade100,
+                    Card(
+                      elevation: 4,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey, width: 2),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        columns: const [
-                          DataColumn(
-                            label: Text('ID'),
+                        child: DataTable(
+                          columnSpacing: 20.0,
+                          headingRowColor: MaterialStateProperty.all(
+                            Colors.deepOrange.shade100,
                           ),
-                          DataColumn(
-                            label: Text('Noms chauffeur'),
-                          ),
-                          DataColumn(
-                            label: Text('Types'),
-                          ),
-                          DataColumn(
-                            label: Text('Email'),
-                          ),
-                          DataColumn(
-                            label: Text('Téléphone'),
-                          ),
-                          DataColumn(
-                            label: Text('Mot de Passe'),
-                          ),
-                          DataColumn(
-                            label: Text('Véhicule'),
-                          ),
-                        ],
-                        rows: _chauffeurs.map((chauffeur) {
-                          return DataRow(cells: [
-                            DataCell(
-                              Text(
-                                chauffeur['chauffeur_id'].toString(),
+                          columns: const [
+                            DataColumn(
+                              label: Text('ID'),
+                            ),
+                            DataColumn(
+                              label: Text('Noms chauffeur'),
+                            ),
+                            DataColumn(
+                              label: Text('Types'),
+                            ),
+                            DataColumn(
+                              label: Text('Email'),
+                            ),
+                            DataColumn(
+                              label: Text('Téléphone'),
+                            ),
+                            DataColumn(
+                              label: Text('Mot de Passe'),
+                            ),
+                            DataColumn(
+                              label: Text('Véhicule'),
+                            ),
+                          ],
+                          rows: _chauffeurs.map((chauffeur) {
+                            return DataRow(cells: [
+                              DataCell(
+                                Text(
+                                  chauffeur['chauffeur_id'].toString(),
+                                ),
                               ),
-                            ),
-                            DataCell(
-                              Text(chauffeur['noms'] ?? ''),
-                            ),
-                            DataCell(
-                              Text(chauffeur['types'] ?? ''),
-                            ),
-                            DataCell(
-                              Text(chauffeur['email'] ?? ''),
-                            ),
-                            DataCell(
-                              Text(chauffeur['telephone'] ?? ''),
-                            ),
-                            DataCell(
-                              Text(
-                                chauffeur['passwords'] ?? '',
-                                overflow: TextOverflow.ellipsis,
+                              DataCell(
+                                Text(chauffeur['noms'] ?? ''),
                               ),
-                            ),
-                            DataCell(
-                              Text(chauffeur['vehicule_id'] ?? ''),
-                            ),
-                          ]);
-                        }).toList(),
+                              DataCell(
+                                Text(chauffeur['types'] ?? ''),
+                              ),
+                              DataCell(
+                                Text(chauffeur['email'] ?? ''),
+                              ),
+                              DataCell(
+                                Text(chauffeur['telephone'] ?? ''),
+                              ),
+                              DataCell(
+                                Text(
+                                  chauffeur['passwords'] ?? '',
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              DataCell(
+                                Text(chauffeur['vehicule_id'] ?? ''),
+                              ),
+                            ]);
+                          }).toList(),
+                        ),
                       ),
                     ),
                     const SizedBox(width: 20),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 2),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: DataTable(
-                        columnSpacing: 20.0,
-                        headingRowColor: MaterialStateProperty.all(
-                          Colors.deepOrange.shade100,
+                    Card(
+                      elevation: 4,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey, width: 2),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        columns: const [
-                          DataColumn(
-                            label: Text('ID'),
+                        child: DataTable(
+                          columnSpacing: 20.0,
+                          headingRowColor: MaterialStateProperty.all(
+                            Colors.deepOrange.shade100,
                           ),
-                          DataColumn(
-                            label: Text('Type'),
-                          ),
-                          DataColumn(
-                            label: Text('Modèle'),
-                          ),
-                          DataColumn(
-                            label: Text('Immatriculation'),
-                          ),
-                        ],
-                        rows: _vehicules.map((vehicule) {
-                          return DataRow(cells: [
-                            DataCell(
-                              Text(
-                                vehicule['vehicule_id'].toString(),
+                          columns: const [
+                            DataColumn(
+                              label: Text('ID'),
+                            ),
+                            DataColumn(
+                              label: Text('Type'),
+                            ),
+                            DataColumn(
+                              label: Text('Modèle'),
+                            ),
+                            DataColumn(
+                              label: Text('Immatriculation'),
+                            ),
+                          ],
+                          rows: _vehicules.map((vehicule) {
+                            return DataRow(cells: [
+                              DataCell(
+                                Text(
+                                  vehicule['vehicule_id'].toString(),
+                                ),
                               ),
-                            ),
-                            DataCell(
-                              Text(vehicule['marque'] ?? ''),
-                            ),
-                            DataCell(
-                              Text(vehicule['modele'] ?? ''),
-                            ),
-                            DataCell(
-                              Text(vehicule['immatriculation'] ?? ''),
-                            ),
-                          ]);
-                        }).toList(),
+                              DataCell(
+                                Text(vehicule['marque'] ?? ''),
+                              ),
+                              DataCell(
+                                Text(vehicule['modele'] ?? ''),
+                              ),
+                              DataCell(
+                                Text(vehicule['immatriculation'] ?? ''),
+                              ),
+                            ]);
+                          }).toList(),
+                        ),
                       ),
                     ),
                   ],

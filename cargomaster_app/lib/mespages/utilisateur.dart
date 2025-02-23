@@ -531,113 +531,116 @@ class _ClientsState extends State<Clients> {
                       ),
                     )
                   else
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 0.2),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: DataTable(
-                        columnSpacing: 20.0,
-                        headingRowColor: MaterialStateProperty.all(
-                          Colors.deepOrange.shade100,
+                    Card(
+                      elevation: 4,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 0.2),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        columns: const [
-                          DataColumn(label: Text('#')),
-                          DataColumn(label: Text('Noms')),
-                          DataColumn(label: Text('Adresse')),
-                          DataColumn(label: Text('Téléphone')),
-                          DataColumn(label: Text('Email')),
-                          DataColumn(label: Text('Date Ajout')),
-                          DataColumn(label: Text('Actions')),
-                        ],
-                        rows: List<DataRow>.generate(filteredItems.length,
-                            (int index) {
-                          final item = filteredItems[index];
-                          return DataRow(
-                            cells: [
-                              DataCell(
-                                Text(
-                                  (index + 1).toString(),
+                        child: DataTable(
+                          columnSpacing: 20.0,
+                          headingRowColor: MaterialStateProperty.all(
+                            Colors.deepOrange.shade100,
+                          ),
+                          columns: const [
+                            DataColumn(label: Text('#')),
+                            DataColumn(label: Text('Noms')),
+                            DataColumn(label: Text('Adresse')),
+                            DataColumn(label: Text('Téléphone')),
+                            DataColumn(label: Text('Email')),
+                            DataColumn(label: Text('Date Ajout')),
+                            DataColumn(label: Text('Actions')),
+                          ],
+                          rows: List<DataRow>.generate(filteredItems.length,
+                              (int index) {
+                            final item = filteredItems[index];
+                            return DataRow(
+                              cells: [
+                                DataCell(
+                                  Text(
+                                    (index + 1).toString(),
+                                  ),
                                 ),
-                              ),
-                              DataCell(Text(
-                                item['noms'] ?? '',
-                                style: const TextStyle(color: Colors.black),
-                              )),
-                              DataCell(Text(
-                                item['adresse'] ?? '',
-                                style: const TextStyle(color: Colors.black),
-                              )),
-                              DataCell(Text(
-                                item['telephone'] ?? '',
-                                style: const TextStyle(color: Colors.black),
-                              )),
-                              DataCell(Text(
-                                item['email'] ?? '',
-                                style: const TextStyle(color: Colors.black),
-                              )),
-                              DataCell(
-                                Text(
-                                  item['date_ajout'] ?? '',
+                                DataCell(Text(
+                                  item['noms'] ?? '',
                                   style: const TextStyle(color: Colors.black),
+                                )),
+                                DataCell(Text(
+                                  item['adresse'] ?? '',
+                                  style: const TextStyle(color: Colors.black),
+                                )),
+                                DataCell(Text(
+                                  item['telephone'] ?? '',
+                                  style: const TextStyle(color: Colors.black),
+                                )),
+                                DataCell(Text(
+                                  item['email'] ?? '',
+                                  style: const TextStyle(color: Colors.black),
+                                )),
+                                DataCell(
+                                  Text(
+                                    item['date_ajout'] ?? '',
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
                                 ),
-                              ),
-                              DataCell(
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) => Colis(
-                                              noms: item['noms'],
-                                              clientId:
-                                                  int.parse(item['client_id']),
+                                DataCell(
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) => Colis(
+                                                noms: item['noms'],
+                                                clientId:
+                                                    int.parse(item['client_id']),
+                                              ),
                                             ),
+                                          );
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.black,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                           ),
-                                        );
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.black,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10, horizontal: 16),
                                         ),
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10, horizontal: 16),
-                                      ),
-                                      child: const Text(
-                                        "Ajouter Colis",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
+                                        child: const Text(
+                                          "Ajouter Colis",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    IconButton(
-                                      iconSize: 20,
-                                      color: Colors.green,
-                                      icon: const Icon(Icons.edit),
-                                      onPressed: () {
-                                        _showEditDialog(item);
-                                      },
-                                    ),
-                                    IconButton(
-                                      iconSize: 20,
-                                      color: Colors.red,
-                                      icon: const Icon(Icons.delete),
-                                      onPressed: () {
-                                        deleteData(item['client_id']);
-                                      },
-                                    ),
-                                  ],
+                                      IconButton(
+                                        iconSize: 20,
+                                        color: Colors.green,
+                                        icon: const Icon(Icons.edit),
+                                        onPressed: () {
+                                          _showEditDialog(item);
+                                        },
+                                      ),
+                                      IconButton(
+                                        iconSize: 20,
+                                        color: Colors.red,
+                                        icon: const Icon(Icons.delete),
+                                        onPressed: () {
+                                          deleteData(item['client_id']);
+                                        },
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          );
-                        }).toList(),
+                              ],
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
                   const Spacer(),

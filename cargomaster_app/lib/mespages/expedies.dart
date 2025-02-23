@@ -141,72 +141,75 @@ class _ExpediesState extends State<Expedies> {
                 )
               : Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 0.1,
+                  child: Card(
+                    elevation: 4,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 0.1,
+                        ),
                       ),
-                    ),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: DataTable(
-                        columnSpacing: 15.0,
-                        headingRowColor: MaterialStateProperty.all(
-                            Colors.deepOrange.shade100),
-                        columns: const [
-                          DataColumn(
-                            label: Text('#'),
-                          ),
-                          DataColumn(
-                            label: Text('Livraison'),
-                          ),
-                          DataColumn(
-                            label: Text('Chauffeur'),
-                          ),
-                          DataColumn(
-                            label: Text('Position'),
-                          ),
-                          DataColumn(
-                            label: Text('État'),
-                          ),
-                        ],
-                        rows: _items.asMap().entries.map((entry) {
-                          int index = entry.key + 1;
-                          Map<String, dynamic> item = entry.value;
-                          return DataRow(cells: [
-                            DataCell(
-                              Text(
-                                index.toString(),
-                              ),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: DataTable(
+                          columnSpacing: 15.0,
+                          headingRowColor: MaterialStateProperty.all(
+                              Colors.deepOrange.shade100),
+                          columns: const [
+                            DataColumn(
+                              label: Text('#'),
                             ),
-                            DataCell(
-                              Text(
-                                item['livraison_id'].toString(),
-                              ),
+                            DataColumn(
+                              label: Text('Livraison'),
                             ),
-                            DataCell(
-                              Text(item['chauffeur_id'] ?? ''),
+                            DataColumn(
+                              label: Text('Chauffeur'),
                             ),
-                            DataCell(
-                              InkWell(
-                                onTap: () {
-                                  _openGoogleMaps(
-                                      item['position_actuelle'] ?? '');
-                                },
-                                child: const Text(
-                                  '📍 Suivre la position',
-                                  style: TextStyle(
-                                      color: Colors.blue,
-                                      fontWeight: FontWeight.bold),
+                            DataColumn(
+                              label: Text('Position'),
+                            ),
+                            DataColumn(
+                              label: Text('État'),
+                            ),
+                          ],
+                          rows: _items.asMap().entries.map((entry) {
+                            int index = entry.key + 1;
+                            Map<String, dynamic> item = entry.value;
+                            return DataRow(cells: [
+                              DataCell(
+                                Text(
+                                  index.toString(),
                                 ),
                               ),
-                            ),
-                            DataCell(
-                              Text(item['etat'] ?? ''),
-                            ),
-                          ]);
-                        }).toList(),
+                              DataCell(
+                                Text(
+                                  item['livraison_id'].toString(),
+                                ),
+                              ),
+                              DataCell(
+                                Text(item['chauffeur_id'] ?? ''),
+                              ),
+                              DataCell(
+                                InkWell(
+                                  onTap: () {
+                                    _openGoogleMaps(
+                                        item['position_actuelle'] ?? '');
+                                  },
+                                  child: const Text(
+                                    '📍 Suivre la position',
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              DataCell(
+                                Text(item['etat'] ?? ''),
+                              ),
+                            ]);
+                          }).toList(),
+                        ),
                       ),
                     ),
                   ),
