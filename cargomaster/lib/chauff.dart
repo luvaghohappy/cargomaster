@@ -254,131 +254,136 @@ class _ChauffeurDashboardState extends State<ChauffeurDashboard> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey, width: 2),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: DataTable(
-                  columnSpacing: 20.0,
-                  headingRowColor:
-                      MaterialStateProperty.all(Colors.deepOrange.shade100),
-                  columns: const [
-                    DataColumn(label: Text('ID Livraison')),
-                    DataColumn(label: Text('Chauffeur')),
-                    DataColumn(label: Text('Colis ID')),
-                    DataColumn(label: Text('Date Départ')),
-                    DataColumn(label: Text('Date Arrivée')),
-                    DataColumn(label: Text('Itinéraire')),
-                    DataColumn(label: Text('Statut Colis')),
-                    DataColumn(label: Text('Etat')),
-                    DataColumn(label: Text("Partage Position")),
-                    DataColumn(label: Text("Livrée")),
-                    DataColumn(label: Text("Retardée")),
-                  ],
-                  rows: livraisonsList.asMap().entries.map((entry) {
-                    int index = entry.key;
-                    var livraison = entry.value;
+              Card(
+                elevation: 4,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey, width: 2),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: DataTable(
+                    columnSpacing: 20.0,
+                    headingRowColor:
+                        MaterialStateProperty.all(Colors.deepOrange.shade100),
+                    columns: const [
+                      DataColumn(label: Text('ID Livraison')),
+                      DataColumn(label: Text('Chauffeur')),
+                      DataColumn(label: Text('Colis ID')),
+                      DataColumn(label: Text('Date Départ')),
+                      DataColumn(label: Text('Date Arrivée')),
+                      DataColumn(label: Text('Itinéraire')),
+                      DataColumn(label: Text('Statut Colis')),
+                      DataColumn(label: Text('Etat')),
+                      DataColumn(label: Text("Partage Position")),
+                      DataColumn(label: Text("Livrée")),
+                      DataColumn(label: Text("Retardée")),
+                    ],
+                    rows: livraisonsList.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      var livraison = entry.value;
 
-                    return DataRow(cells: [
-                      DataCell(
-                        Text(
-                          livraison['livraison_id'].toString(),
-                        ),
-                      ),
-                      DataCell(
-                        Text(
-                          livraison['chauffeur_id'].toString(),
-                        ),
-                      ),
-                      DataCell(
-                        Text(
-                          livraison['colis_id'].toString(),
-                        ),
-                      ),
-                      DataCell(
-                        Text(
-                          livraison['date_depart'].toString(),
-                        ),
-                      ),
-                      DataCell(
-                        Text(
-                          livraison['date_arrivee_prevue'].toString(),
-                        ),
-                      ),
-                      DataCell(
-                        InkWell(
-                          onTap: () => _moveToLocation(
-                            livraison['itineraire'],
-                          ),
-                          child: const Text(
-                            'Itinéraire',
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
+                      return DataRow(cells: [
+                        DataCell(
+                          Text(
+                            livraison['livraison_id'].toString(),
                           ),
                         ),
-                      ),
-                      DataCell(
-                        Text(
-                          livraison['statut_colis'].toString(),
-                        ),
-                      ),
-                      DataCell(
-                        Text(
-                          livraison['etat'].toString(),
-                        ),
-                      ),
-                      DataCell(
-                        IconButton(
-                          icon: Icon(Icons.share),
-                          onPressed: () => sendPosition(
-                            livraison['livraison_id'],
-                            livraison['chauffeur_id'],
+                        DataCell(
+                          Text(
+                            livraison['chauffeur_id'].toString(),
                           ),
                         ),
-                      ),
-                      DataCell(
-                        IconButton(
-                          icon: Icon(
-                            deliveredStatus[index]
-                                ? Icons.done
-                                : Icons.circle_outlined,
-                            color: deliveredStatus[index]
-                                ? Colors.green
-                                : Colors.grey,
+                        DataCell(
+                          Text(
+                            livraison['colis_id'].toString(),
                           ),
-                          onPressed: () {
-                            setState(() {
-                              deliveredStatus[index] = true;
-                              delayedStatus[index] = false;
-                            });
-                            _updateStatus(livraison['livraison_id'], "Livrée");
-                          },
                         ),
-                      ),
-                      DataCell(
-                        IconButton(
-                          icon: Icon(
-                            delayedStatus[index]
-                                ? Icons.error_outline
-                                : Icons.circle_outlined,
-                            color:
-                                delayedStatus[index] ? Colors.red : Colors.grey,
+                        DataCell(
+                          Text(
+                            livraison['date_depart'].toString(),
                           ),
-                          onPressed: () {
-                            setState(() {
-                              delayedStatus[index] = true;
-                              deliveredStatus[index] = false;
-                            });
-                            _updateStatus(
-                                livraison['livraison_id'], "Retardée");
-                          },
                         ),
-                      ),
-                    ]);
-                  }).toList(),
+                        DataCell(
+                          Text(
+                            livraison['date_arrivee_prevue'].toString(),
+                          ),
+                        ),
+                        DataCell(
+                          InkWell(
+                            onTap: () => _moveToLocation(
+                              livraison['itineraire'],
+                            ),
+                            child: const Text(
+                              'Itinéraire',
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          Text(
+                            livraison['statut_colis'].toString(),
+                          ),
+                        ),
+                        DataCell(
+                          Text(
+                            livraison['etat'].toString(),
+                          ),
+                        ),
+                        DataCell(
+                          IconButton(
+                            icon: Icon(Icons.share),
+                            onPressed: () => sendPosition(
+                              livraison['livraison_id'],
+                              livraison['chauffeur_id'],
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          IconButton(
+                            icon: Icon(
+                              deliveredStatus[index]
+                                  ? Icons.done
+                                  : Icons.circle_outlined,
+                              color: deliveredStatus[index]
+                                  ? Colors.green
+                                  : Colors.grey,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                deliveredStatus[index] = true;
+                                delayedStatus[index] = false;
+                              });
+                              _updateStatus(
+                                  livraison['livraison_id'], "Livrée");
+                            },
+                          ),
+                        ),
+                        DataCell(
+                          IconButton(
+                            icon: Icon(
+                              delayedStatus[index]
+                                  ? Icons.error_outline
+                                  : Icons.circle_outlined,
+                              color: delayedStatus[index]
+                                  ? Colors.red
+                                  : Colors.grey,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                delayedStatus[index] = true;
+                                deliveredStatus[index] = false;
+                              });
+                              _updateStatus(
+                                  livraison['livraison_id'], "Retardée");
+                            },
+                          ),
+                        ),
+                      ]);
+                    }).toList(),
+                  ),
                 ),
               ),
             ],

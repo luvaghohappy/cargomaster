@@ -670,43 +670,46 @@ class _DataTableWidgetState extends State<DataTableWidget> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey, width: 0.1),
-        ),
-        child: DataTable(
-          columnSpacing: 20.0,
-          headingRowColor:
-              MaterialStateProperty.all(Colors.deepOrange.shade100),
-          columns: const [
-            DataColumn(label: Text('#')),
-            DataColumn(label: Text('Noms')),
-            DataColumn(label: Text('Adresse')),
-            DataColumn(label: Text('Téléphone')),
-            DataColumn(label: Text('Email')),
-            DataColumn(label: Text('Date Ajout')),
-            DataColumn(label: Text('Actions')),
-          ],
-          rows: List.generate(items.length, (index) {
-            final item = items[index];
-            return DataRow(
-              cells: [
-                DataCell(Text((index + 1).toString())),
-                DataCell(Text(item['noms'] ?? '')),
-                DataCell(Text(item['adresse'] ?? '')),
-                DataCell(Text(item['telephone'] ?? '')),
-                DataCell(Text(item['email'] ?? '')),
-                DataCell(Text(item['date_ajout'] ?? '')),
-                DataCell(
-                  Checkbox(
-                    value: true,
-                    activeColor: Colors.green,
-                    onChanged: (bool? value) {},
+      child: Card(
+        elevation: 4,
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey, width: 0.1),
+          ),
+          child: DataTable(
+            columnSpacing: 20.0,
+            headingRowColor:
+                MaterialStateProperty.all(Colors.deepOrange.shade100),
+            columns: const [
+              DataColumn(label: Text('#')),
+              DataColumn(label: Text('Noms')),
+              DataColumn(label: Text('Adresse')),
+              DataColumn(label: Text('Téléphone')),
+              DataColumn(label: Text('Email')),
+              DataColumn(label: Text('Date Ajout')),
+              DataColumn(label: Text('Actions')),
+            ],
+            rows: List.generate(items.length, (index) {
+              final item = items[index];
+              return DataRow(
+                cells: [
+                  DataCell(Text((index + 1).toString())),
+                  DataCell(Text(item['noms'] ?? '')),
+                  DataCell(Text(item['adresse'] ?? '')),
+                  DataCell(Text(item['telephone'] ?? '')),
+                  DataCell(Text(item['email'] ?? '')),
+                  DataCell(Text(item['date_ajout'] ?? '')),
+                  DataCell(
+                    Checkbox(
+                      value: true,
+                      activeColor: Colors.green,
+                      onChanged: (bool? value) {},
+                    ),
                   ),
-                ),
-              ],
-            );
-          }).toList(),
+                ],
+              );
+            }).toList(),
+          ),
         ),
       ),
     );

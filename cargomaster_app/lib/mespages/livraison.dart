@@ -387,165 +387,128 @@ class _LivraisonsState extends State<Livraisons> {
       appBar: AppBar(
         title: const Text("Colis a Livrés"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Card(
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.start, // Aligner au début
-                children: [
-                  /// --- SEARCH BAR ---
-                  Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: SizedBox(
-                        width: 300,
-                        child: TextField(
-                          onChanged: _filterItems,
-                          style: const TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            hintText: 'Rechercher ...',
-                            hintStyle: const TextStyle(color: Colors.black),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: const BorderSide(color: Colors.white),
+      body: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start, // Aligner au début
+              children: [
+                /// --- SEARCH BAR ---
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: SizedBox(
+                      width: 300,
+                      child: TextField(
+                        onChanged: _filterItems,
+                        style: const TextStyle(color: Colors.black),
+                        decoration: InputDecoration(
+                          hintText: 'Rechercher ...',
+                          hintStyle: const TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: const BorderSide(color: Colors.white),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                          prefixIcon: const Icon(Icons.search),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                if (filteredItems.isEmpty)
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20.0),
+                      child: Text(
+                        'Aucune Livraison trouvée',
+                        style: TextStyle(fontSize: 18, color: Colors.red),
+                      ),
+                    ),
+                  )
+                else
+                  Card(
+                    elevation: 4,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 0.2),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: SingleChildScrollView(
+                        scrollDirection:
+                            Axis.horizontal, // ✅ Permet le scroll horizontal
+                        child: SingleChildScrollView(
+                          child: DataTable(
+                            columnSpacing: 20.0,
+                            headingRowColor: MaterialStateProperty.all(
+                              Colors.deepOrange.shade100,
                             ),
-                            filled: true,
-                            fillColor: Colors.white,
-                            prefixIcon: const Icon(Icons.search),
+                            columns: const [
+                              DataColumn(label: Text('ID Livraison')),
+                              DataColumn(label: Text('Vehicule ID')),
+                              DataColumn(label: Text('Chauffeur')),
+                              DataColumn(label: Text('Colis ID')),
+                              DataColumn(label: Text('Date Départ')),
+                              DataColumn(label: Text('Date Arrivée')),
+                              DataColumn(label: Text('Itineraire')),
+                              DataColumn(label: Text('Statut')),
+                              DataColumn(label: Text('Statut Colis')),
+                              DataColumn(label: Text('Actions')),
+                            ],
+                            rows: livraisons.map((livraison) {
+                              return DataRow(
+                                cells: [
+                                  DataCell(
+                                    Text(
+                                      livraison['livraison_id'].toString(),
+                                    ),
+                                  ),
+                                  DataCell(Text(
+                                      livraison['vehicule_id'].toString())),
+                                  DataCell(Text(
+                                      livraison['chauffeur_id'].toString())),
+                                  DataCell(
+                                      Text(livraison['colis_id'].toString())),
+                                  DataCell(Text(
+                                      livraison['date_depart'].toString())),
+                                  DataCell(Text(livraison['date_arrivee_prevue']
+                                      .toString())),
+                                  DataCell(
+                                      Text(livraison['itineraire'] ?? "N/A")),
+                                  DataCell(
+                                      Text(livraison['statut'].toString())),
+                                  DataCell(Text(
+                                      livraison['statut_colis'].toString())),
+                                  DataCell(
+                                    Row(
+                                      children: [
+                                        const SizedBox(width: 5),
+                                        IconButton(
+                                          icon: const Icon(Icons.delete,
+                                              color: Colors.red),
+                                          onPressed: () => deleteLivraison(
+                                              livraison['livraison_id']
+                                                  .toString()),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }).toList(),
                           ),
                         ),
                       ),
                     ),
                   ),
-                  if (filteredItems.isEmpty)
-                    const Center(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20.0),
-                        child: Text(
-                          'Aucune Livraison trouvée',
-                          style: TextStyle(fontSize: 18, color: Colors.red),
-                        ),
-                      ),
-                    )
-                  else
-                    Card(
-                      elevation: 4,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black, width: 0.2),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: DataTable(
-                          columnSpacing: 20.0,
-                          headingRowColor: MaterialStateProperty.all(
-                            Colors.deepOrange.shade100,
-                          ),
-                          columns: const [
-                            DataColumn(
-                              label: Text('ID Livraison'),
-                            ),
-                            DataColumn(
-                              label: Text('Vehicule ID'),
-                            ),
-                            DataColumn(
-                              label: Text('Chauffeur'),
-                            ),
-                            DataColumn(
-                              label: Text('Colis ID'),
-                            ),
-                            DataColumn(
-                              label: Text('Date Départ'),
-                            ),
-                            DataColumn(
-                              label: Text('Date Arrivée'),
-                            ),
-                            DataColumn(
-                              label: Text('Itineraire'),
-                            ),
-                            DataColumn(
-                              label: Text('Statut'),
-                            ),
-                            DataColumn(
-                              label: Text('Statut Colis'),
-                            ),
-                            DataColumn(
-                              label: Text('Actions'),
-                            ),
-                          ],
-                          rows: livraisons.map((livraison) {
-                            return DataRow(
-                              cells: [
-                                DataCell(Text(
-                                  livraison['livraison_id'].toString(),
-                                )),
-                                DataCell(Text(
-                                  livraison['vehicule_id'].toString(),
-                                )),
-                                DataCell(
-                                  Text(
-                                    livraison['chauffeur_id'].toString(),
-                                  ),
-                                ),
-                                DataCell(
-                                  Text(
-                                    livraison['colis_id'].toString(),
-                                  ),
-                                ),
-                                DataCell(
-                                  Text(
-                                    livraison['date_depart'].toString(),
-                                  ),
-                                ),
-                                DataCell(
-                                  Text(
-                                    livraison['date_arrivee_prevue'].toString(),
-                                  ),
-                                ),
-                                DataCell(
-                                  Text(
-                                    livraison['itineraire'] ?? "N/A",
-                                  ),
-                                ),
-                                DataCell(
-                                  Text(
-                                    livraison['statut'].toString(),
-                                  ),
-                                ),
-                                DataCell(
-                                  Text(
-                                    livraison['statut_colis'].toString(),
-                                  ),
-                                ),
-                                DataCell(
-                                  Row(
-                                    children: [
-                                      const SizedBox(width: 5),
-                                      IconButton(
-                                        icon: const Icon(Icons.delete,
-                                            color: Colors.red),
-                                        onPressed: () => deleteLivraison(
-                                          livraison['livraison_id'].toString(),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
-                ],
-              ),
+              ],
             ),
           ),
         ),
